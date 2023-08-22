@@ -16,9 +16,15 @@ class DashboardController extends Controller
 {
     public function index(){
         $groups = group::all();
+        $project = Project::all();
+        $projectCountOne = Project::where('status', '1')->count();
+        $projectCountTwo = Project::where('status', '2')->count();
+        $projectCountthree = Project::where('status', '3')->count();
+        $projectCountFour = Project::where('status', '4')->count();
+
         $users = User::select('fullname', 'id')->get();
         $customer = Customer::select('name', 'id')->get();
-        return view('dashboard.index',['groups' => $groups, 'users' => $users, 'customers' => $customer]);
+        return view('dashboard.index',['groups' => $groups, 'users' => $users, 'customers' => $customer, 'projects' => $project, 'projectCountOne' => $projectCountOne, 'projectCountTwo' => $projectCountTwo, 'projectCountthree' => $projectCountthree, 'projectCountFour' => $projectCountFour]);
     }
 
     public function addProject(Request $request) {
@@ -110,6 +116,7 @@ class DashboardController extends Controller
     }
 
 
+
     private function sendMail($name,$mail,$desc) {
         if (!filter_var(trim($mail), FILTER_VALIDATE_EMAIL)) {
             return response()->json('Invalid email address', 422);
@@ -122,6 +129,8 @@ class DashboardController extends Controller
         //send mail queue
         SendMailJob::dispatch($dataMail);
     }
+
+
 
 
     private function getPermission($type) {

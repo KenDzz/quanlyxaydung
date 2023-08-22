@@ -1,4 +1,12 @@
 $(document).ready(function () {
+
+    $(".money-vnd").each(function() {
+        var value = parseFloat($(this).text()); // Lấy giá trị số từ trường nhập liệu
+        var formattedValue = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value);
+        $(this).text(formattedValue); // Cập nhật trường nhập liệu với giá trị đã định dạng
+    });
+
+
     $("#input-email-login").click(function () {
         if ($(this).hasClass("is-invalid")) {
             $(this).removeClass("is-invalid");
