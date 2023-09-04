@@ -11,6 +11,7 @@
                 <h2 class="d-flex align-items-center tx-16 mb-0 pd-r-15 mr-2 bd-r "><i data-feather="airplay"
                         class="wd-20 mr-2"></i>Quản lý dự án</h2>
             </div>
+            @admin
             <div class="d-flex hidden-xs">
                 <button type="button" class="btn btn-primary waves-effect" data-toggle="modal" data-target=".add-project"><i
                         class="fa fa-plus mr-2"></i>Dự Án</button>
@@ -108,7 +109,9 @@
                     </div>
                 </div>
             </div>
+            @end
         </div>
+        @admin
                 <!--================================-->
         <!-- Currency Mini Card Start -->
         <!--================================-->
@@ -166,10 +169,13 @@
                 </div>
              </div>
          </div>
+         @end
          <!--/ Currency Mini Card End -->
          <div class="row row-xs">
 
             @foreach ($projects as $project)
+            @if (auth()->user()->permission_id == config('app.userproject_Admin'))
+
             <!--================================-->
             <!-- Bitcoin Wallet Start -->
             <!--================================-->
@@ -181,7 +187,7 @@
                          <div class="dropdown">
                             <a href="" class="" data-toggle="dropdown"><i data-feather="more-horizontal" class="wd-16  ht-16"></i></a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a href="" class="dropdown-item"><i data-feather="info" class="wd-16 ht-16 mr-2"></i>View Details</a>
+                                <a href="{{route('Dashboard-project-detail', ['id' => $project->id])}}" class="dropdown-item"><i data-feather="info" class="wd-16 ht-16 mr-2"></i>View Details</a>
                                 <a href="" class="dropdown-item"><i data-feather="share" class="wd-16 ht-16 mr-2"></i>Share</a>
                                 <a href="" class="dropdown-item"><i data-feather="download" class="wd-16 ht-16 mr-2"></i>Download</a>
                                 <a href="" class="dropdown-item"><i data-feather="copy" class="wd-16 ht-16 mr-2"></i>Copy to</a>
@@ -221,7 +227,56 @@
                    </div>
                 </div>
              </div>
-             <!--/ Bitcoin Wallet End -->
+             @else
+             <div class="col-md-6 col-lg-4">
+                <div class="card mg-b-20">
+                   <div class="card-header d-flex align-items-center justify-content-between">
+                      <h6 class="mb-0">{{$project->project->name}}</h6>
+                      <div class="card-header-btn">
+                         <div class="dropdown">
+                            <a href="" class="" data-toggle="dropdown"><i data-feather="more-horizontal" class="wd-16  ht-16"></i></a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a href="{{route('Dashboard-project-detail', ['id' => $project->project->id])}}" class="dropdown-item"><i data-feather="info" class="wd-16 ht-16 mr-2"></i>View Details</a>
+                                <a href="" class="dropdown-item"><i data-feather="share" class="wd-16 ht-16 mr-2"></i>Share</a>
+                                <a href="" class="dropdown-item"><i data-feather="download" class="wd-16 ht-16 mr-2"></i>Download</a>
+                                <a href="" class="dropdown-item"><i data-feather="copy" class="wd-16 ht-16 mr-2"></i>Copy to</a>
+                                <a href="" class="dropdown-item"><i data-feather="folder" class="wd-16 ht-16 mr-2"></i>Move to</a>
+                                <a href="" class="dropdown-item"><i data-feather="edit" class="wd-16 ht-16 mr-2"></i>Rename</a>
+                                <a href="" class="dropdown-item"><i data-feather="trash" class="wd-16 ht-16 mr-2"></i>Delete</a>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                   <div class="card-body">
+                      <div class="d-flex align-items-center">
+                         <div class="wd-40 ht-40 {{$project->project->status_color}} tx-white rounded-circle justify-content-center align-items-center d-none d-sm-flex"></div>
+                         <div class="ml-2">
+                            <h2 class="tx-15 mg-b-5">{{$project->project->group->name}}</h2>
+                            <h3 class="tx-15 mg-b-5">{{$project->project->status_text}}</h3>
+                            <p class="tx-13 mb-0"><span class="money-vnd">{{$project->project->budget}}</span></p>
+                         </div>
+                      </div>
+                      <div class="mg-t-25">
+                         <h6 class="mg-y-5 tx-15 tx-normal">{{$project->project->describe}}</h6>
+                      </div>
+                      <div class="mg-t-25">
+                         <div class="table-responsive">
+                            <table class="table table-hover table-bordered">
+                               <tbody><tr>
+                                  <td>Thời gian bắt đầu: </td>
+                                  <td>{{$project->project->date_start}}</td>
+                               </tr>
+                               <tr>
+                                  <td>Thời gian kết thúc: </td>
+                                  <td>{{$project->project->date_end}}</td>
+                               </tr>
+                            </tbody></table>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+             @endif
             @endforeach
          </div>
     </div>

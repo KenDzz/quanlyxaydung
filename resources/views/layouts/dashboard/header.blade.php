@@ -76,76 +76,6 @@
         <!--================================-->
         <div class="header-right">
             <ul class="list-inline justify-content-end mb-0 d-flex align-items-center">
-                <!--================================-->
-                <!-- Service Dropdown Start -->
-                <!--================================-->
-                <li class="list-inline-item dropdown hidden-xs">
-                    <a class="dropdown-icon waves-effect" href="" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        <svg class="adata-svg-icon">
-                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                <rect x="0" y="0" width="24" height="24" />
-                                <rect fill="#000000" opacity="0.3" x="4" y="4" width="4"
-                                    height="4" rx="1" />
-                                <path
-                                    d="M5,10 L7,10 C7.55228475,10 8,10.4477153 8,11 L8,13 C8,13.5522847 7.55228475,14 7,14 L5,14 C4.44771525,14 4,13.5522847 4,13 L4,11 C4,10.4477153 4.44771525,10 5,10 Z M11,4 L13,4 C13.5522847,4 14,4.44771525 14,5 L14,7 C14,7.55228475 13.5522847,8 13,8 L11,8 C10.4477153,8 10,7.55228475 10,7 L10,5 C10,4.44771525 10.4477153,4 11,4 Z M11,10 L13,10 C13.5522847,10 14,10.4477153 14,11 L14,13 C14,13.5522847 13.5522847,14 13,14 L11,14 C10.4477153,14 10,13.5522847 10,13 L10,11 C10,10.4477153 10.4477153,10 11,10 Z M17,4 L19,4 C19.5522847,4 20,4.44771525 20,5 L20,7 C20,7.55228475 19.5522847,8 19,8 L17,8 C16.4477153,8 16,7.55228475 16,7 L16,5 C16,4.44771525 16.4477153,4 17,4 Z M17,10 L19,10 C19.5522847,10 20,10.4477153 20,11 L20,13 C20,13.5522847 19.5522847,14 19,14 L17,14 C16.4477153,14 16,13.5522847 16,13 L16,11 C16,10.4477153 16.4477153,10 17,10 Z M5,16 L7,16 C7.55228475,16 8,16.4477153 8,17 L8,19 C8,19.5522847 7.55228475,20 7,20 L5,20 C4.44771525,20 4,19.5522847 4,19 L4,17 C4,16.4477153 4.44771525,16 5,16 Z M11,16 L13,16 C13.5522847,16 14,16.4477153 14,17 L14,19 C14,19.5522847 13.5522847,20 13,20 L11,20 C10.4477153,20 10,19.5522847 10,19 L10,17 C10,16.4477153 10.4477153,16 11,16 Z M17,16 L19,16 C19.5522847,16 20,16.4477153 20,17 L20,19 C20,19.5522847 19.5522847,20 19,20 L17,20 C16.4477153,20 16,19.5522847 16,19 L16,17 C16,16.4477153 16.4477153,16 17,16 Z"
-                                    fill="#000000" />
-                            </g>
-                        </svg>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <div class="row no-gutters header-service">
-                            <div class="col-md-6 bd-r bd-b">
-                                <a href="" class="tx-center d-block waves-effect waves-light">
-                                    <img src="../../assets/images/icon/bag.png" class="img-fluid wd-50"
-                                        alt="">
-                                    <h2 class="tx-15 mg-t-10 mb-0">Shopping</h2>
-                                    <p class="tx-12 mb-0">Shopping Cart</p>
-                                </a>
-                            </div>
-                            <div class="col-md-6 bd-b">
-                                <a href="" class="tx-center d-block waves-effect waves-light">
-                                    <img src="../../assets/images/icon/bill.png" class="img-fluid wd-50"
-                                        alt="">
-                                    <h2 class="tx-15 mg-t-10 mb-0">Billing</h2>
-                                    <p class="tx-12 mb-0">Online Billing</p>
-                                </a>
-                            </div>
-                            <div class="col-md-6 bd-r bd-b">
-                                <a href="" class="tx-center d-block waves-effect waves-light">
-                                    <img src="../../assets/images/icon/bill-reciept.png" class="img-fluid wd-50"
-                                        alt="">
-                                    <h2 class="tx-15 mg-t-10 mb-0">Billing</h2>
-                                    <p class="tx-12 mb-0">Billing Receipt</p>
-                                </a>
-                            </div>
-                            <div class="col-md-6 bd-b">
-                                <a href="" class="tx-center d-block waves-effect waves-light">
-                                    <img src="../../assets/images/icon/finance.png" class="img-fluid wd-50"
-                                        alt="">
-                                    <h2 class="tx-15 mg-t-10 mb-0">Finance</h2>
-                                    <p class="tx-12 mb-0">Finance Details</p>
-                                </a>
-                            </div>
-                            <div class="col-md-6 bd-r bd-b">
-                                <a href="" class="tx-center d-block waves-effect waves-light">
-                                    <img src="../../assets/images/icon/offer.png" class="img-fluid wd-50"
-                                        alt="">
-                                    <h2 class="tx-15 mg-t-10 mb-0">Offers</h2>
-                                    <p class="tx-12 mb-0">Big Deal Offers</p>
-                                </a>
-                            </div>
-                            <div class="col-md-6 bd-b">
-                                <a href="" class="tx-center d-block waves-effect waves-light">
-                                    <img src="../../assets/images/icon/shipping.png" class="img-fluid wd-50"
-                                        alt="">
-                                    <h2 class="tx-15 mg-t-10 mb-0">Shipping</h2>
-                                    <p class="tx-12 mb-0">Shipping Details</p>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </li>
                 <!--/ Service Dropdown End -->
                 <!--================================-->
                 <!-- Languages Dropdown Start -->
@@ -550,29 +480,21 @@
                                 </div>
                                 <div class="profile-text">
                                     <h6>Ruhul Hasan</h6>
-                                    <span class="tx-rubik">Balance: $1,425</span>
                                 </div>
                             </div>
                             <a href="" class="dropdown-item d-flex align-items-center"><span
                                     data-feather="user" class="wd-16 ht-16 mr-2"></span>Profile</a>
-                            <a href="" class="dropdown-item d-flex align-items-center"><span
-                                    data-feather="message-square" class="wd-16 ht-16 mr-2"></span>Messages</a>
+                            <a href="" class="dropdown-item d-flex align-items-center">
+                                <span data-feather="message-square" class="wd-16 ht-16 mr-2"></span>
+                                Messages
+                            </a>
                             <div class="dropdown-divider"></div>
                             <a href="" class="dropdown-item d-flex align-items-center"><span
                                     data-feather="settings" class="wd-16 ht-16 mr-2"></span>Settings</a>
-                            <a href="" class="dropdown-item d-flex align-items-center"><span
-                                    data-feather="activity" class="wd-16 ht-16 mr-2"></span>Activity</a>
-                            <a href="" class="dropdown-item d-flex align-items-center"><span
-                                    data-feather="download" class="wd-16 ht-16 mr-2"></span>Download</a>
-                            <div class="dropdown-divider"></div>
-                            <a href="" class="dropdown-item d-flex align-items-center"><span
-                                    data-feather="layout" class="wd-16 ht-16 mr-2"></span>Forum</a>
-                            <a href="" class="dropdown-item d-flex align-items-center"><span
-                                    data-feather="headphones" class="wd-16 ht-16 mr-2"></span>Support</a>
-                            <a href="" class="dropdown-item d-flex align-items-center"><span
-                                    data-feather="life-buoy" class="wd-16 ht-16 mr-2"></span>Help</a>
-                            <a href="" class="dropdown-item d-flex align-items-center"><span
-                                    data-feather="log-out" class="wd-16 ht-16 mr-2"></span>Sign Out</a>
+                            <a href="{{ route('logout') }}" class="dropdown-item d-flex align-items-center">
+                                <span data-feather="log-out" class="wd-16 ht-16 mr-2"></span>
+                                Sign Out
+                            </a>
                         </div>
                     </div>
                 </li>

@@ -101,7 +101,7 @@ fullcalender.prototype.FullCalendar = function () {
   });
 
   var calendar = $('#calendar').fullCalendar({
-
+    locale: 'vi',
     eventClick: function eventClick(calEvent, jsEvent, view) {
       var end = calEvent.end !== null ? moment(calEvent.end).format() : '';
       $('#title').val(calEvent.title);
@@ -144,52 +144,36 @@ fullcalender.prototype.FullCalendar = function () {
         $(this).remove();
       }
     },
-    events: [{
-      title: 'All Day Event',
-      start: new Date(y, m, 1),
-      className: 'bg-wisteria',
-      allDay: true
-    }, {
-      title: 'Long Event',
-      start: new Date(y, m, d - 5),
-      end: new Date(y, m, d - 2),
-      className: 'bg-alizarin'
-    }, {
-      id: 999,
-      title: 'Repeating Event',
-      start: new Date(y, m, d - 3, 16, 0),
-      allDay: false,
-      className: 'bg-pumpkins'
-    }, {
-      id: 999,
-      title: 'Repeating Event',
-      start: new Date(y, m, d + 4, 16, 0),
-      allDay: false,
-      className: 'bg-wet-asphalt'
-    }, {
-      title: 'Meeting',
-      start: new Date(y, m, d, 10, 30),
-      allDay: false,
-      className: 'bg-green-sea'
-    }, {
-      title: 'Lunch',
-      start: new Date(y, m, d, 12, 0),
-      end: new Date(y, m, d, 14, 0),
-      allDay: false,
-      className: 'bg-carrot'
-    }, {
-      title: 'Birthday Party',
-      start: new Date(y, m, d + 1, 19, 0),
-      end: new Date(y, m, d + 1, 22, 30),
-      allDay: false
-    }, {
-      title: 'Click for Google',
-      start: moment().add(25, 'd'),
-      end: moment().add(25, 'd').add(5, 'm'),
-      url: 'http://google.com/'
-    }]
+    events: []
   });
+
+  function getData() {
+    $.ajax({
+        url: "/datacalendar",
+        method: "post",
+        dataType: "json",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        beforeSend: function () {
+            Notiflix.Block.standard(".box-calendar");
+        },
+        complete: function () {
+            Notiflix.Block.remove(".box-calendar");
+        },
+    })
+    .done(function (data) {
+        calendar.fullCalendar('removeEvents');
+        calendar.fullCalendar('addEventSource', data);
+    })
+    .fail(function (jqXHR, ajaxOptions, thrownError) {
+    });
+}
+getData();
+
 };
+
+
 
 /**
 * ------------------------------------------------------------------------
@@ -204,7 +188,7 @@ var Pluggin = {
     } else {
       throw new Error('First install flatpickr plugin! https://chmln.github.io/flatpickr/');
     }
-  } 
+  }
 
 };
 

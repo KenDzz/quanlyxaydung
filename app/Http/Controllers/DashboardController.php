@@ -8,27 +8,32 @@ use App\Models\User;
 use App\Models\Customer;
 use App\Models\Project;
 use App\Models\UserProject;
-use Illuminate\Support\Facades\Mail;
-use App\Jobs\SendMailJob;
-
+use App\Models\UserWork;
 
 class DashboardController extends Controller
 {
     public function index(){
-        $groups = group::all();
-        $project = Project::all();
-        $projectCountOne = Project::where('status', '1')->count();
-        $projectCountTwo = Project::where('status', '2')->count();
-        $projectCountthree = Project::where('status', '3')->count();
-        $projectCountFour = Project::where('status', '4')->count();
+        if(auth()->user()->permission_id == config('app.userproject_Admin')){
+            $groups = group::all();
+            $project = Project::all();
+            $projectCountOne = Project::where('status', '1')->count();
+            $projectCountTwo = Project::where('status', '2')->count();
+            $projectCountthree = Project::where('status', '3')->count();
+            $projectCountFour = Project::where('status', '4')->count();
 
-        $users = User::select('fullname', 'id')->get();
-        $customer = Customer::select('name', 'id')->get();
-        return view('dashboard.index',['groups' => $groups, 'users' => $users, 'customers' => $customer, 'projects' => $project, 'projectCountOne' => $projectCountOne, 'projectCountTwo' => $projectCountTwo, 'projectCountthree' => $projectCountthree, 'projectCountFour' => $projectCountFour]);
+            $users = User::select('fullname', 'id')->get();
+            $customer = Customer::select('name', 'id')->get();
+            $data = ['groups' => $groups, 'users' => $users, 'customers' => $customer, 'projects' => $project, 'projectCountOne' => $projectCountOne, 'projectCountTwo' => $projectCountTwo, 'projectCountthree' => $projectCountthree, 'projectCountFour' => $projectCountFour];
+        }else{
+            $userProjects = UserProject::where('user_id', auth()->user()->id)->with('project')->get();
+            $data = ['projects' => $userProjects];
+        }
+
+        return view('dashboard.index',$data);
     }
 
     public function addProject(Request $request) {
-
+        $mail = new MailController();
         $checkProject = $request->validate([
             'name' => ['required'],
             'desc' => ['required'],
@@ -66,7 +71,7 @@ class DashboardController extends Controller
                     $userIDAdmin = User::where('id', $admin)->first();
                     if ($userIDAdmin) {
                         $desc = "Bạn được thêm vào dự án ".$project->name." với quyền <font style='color: red;'>".$this->getPermission(config('app.userproject_Admin'))."<font>";
-                        $this->sendMail($project->name,$userIDAdmin->email,$desc);
+                        $mail->sendMail($project->name,$userIDAdmin->email,$desc);
                     }
                 }
 
@@ -83,7 +88,7 @@ class DashboardController extends Controller
                     $userIDPerform = User::where('id', $userperform)->first();
                     if ($userIDPerform) {
                         $desc = "Bạn được thêm vào dự án".$project->name." với quyền ".$this->getPermission(config('app.userproject_Userperform'));
-                        $this->sendMail($project->name,$userIDPerform->email,$desc);
+                        $mail->sendMail($project->name,$userIDPerform->email,$desc);
                     }
                 }
 
@@ -100,8 +105,8 @@ class DashboardController extends Controller
                     }else{
                         $userIDMoniter = User::where('id', $usermoniter)->first();
                         if ($userIDMoniter) {
-                            $desc = "Bạn được thêm vào dự án".$project->name." với quyền ".$this->getPermission(config('app.userproject_Admin'));
-                            $this->sendMail($project->name,$userIDMoniter->email,$desc);
+                            $desc = "Bạn được thêm vào dự án".$project->name." với quyền ".$this->getPermission(config('app.userproject_Usermoniter'));
+                            $mail->sendMail($project->name,$userIDMoniter->email,$desc);
                         }
                     }
 
@@ -116,19 +121,6 @@ class DashboardController extends Controller
     }
 
 
-
-    private function sendMail($name,$mail,$desc) {
-        if (!filter_var(trim($mail), FILTER_VALIDATE_EMAIL)) {
-            return response()->json('Invalid email address', 422);
-        }
-
-        $dataMail = new \stdClass();
-        $dataMail->name = $name;
-        $dataMail->email = trim($mail);
-        $dataMail->desc = $desc;
-        //send mail queue
-        SendMailJob::dispatch($dataMail);
-    }
 
 
 

@@ -57,4 +57,9 @@ class Project extends Model
 
         return $statuses[$this->attributes['status']] ?? 'Không xác định';
     }
+
+    public function userProject()
+    {
+        return $this->hasMany(UserProject::class, 'project_id');
+    }
 }

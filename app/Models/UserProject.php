@@ -15,5 +15,11 @@ class UserProject extends Model
         'user_id',
         'level'
     ];
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class, 'project_id');
+    }
+
     public $timestamps = false;
 }

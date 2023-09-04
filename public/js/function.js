@@ -19,6 +19,58 @@ $(document).ready(function () {
         }
     });
 
+
+    $(".btn-add-work").click(function () {
+        myDropzone.processQueue();
+        myDropzone.on("success", function(file, response) {
+            if (response["status"] == "true") {
+                var idUpload = response["file_id"];
+                var name = $("#name-work").val();
+                var level = $("#level-work").val();
+                var datestart = $("#start-date-work").val();
+                var dateend = $("#end-date-work").val();
+                var content =$('.summernote-work').summernote('code');
+                var userwork = $("#user-work").val();
+                var projectid = $("#id-work").val();
+                $.ajax({
+                    url: "/dashboard/addwork",
+                    method: "post",
+                    dataType: "json",
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    data: {
+                        name: name,
+                        content: content,
+                        userwork: userwork,
+                        datestart: datestart,
+                        dateend: dateend,
+                        level: level,
+                        idupload: idUpload,
+                        projectid: projectid
+                    },
+                    beforeSend: function () {
+                        Notiflix.Block.standard(".modal-work");
+                    },
+                    complete: function () {
+                        Notiflix.Block.remove(".modal-work");
+                    },
+                })
+                    .done(function (data) {
+                        Notiflix.Notify.success(data);
+                    })
+                    .fail(function (jqXHR, ajaxOptions, thrownError) {
+                        Notiflix.Notify.failure("Lỗi hệ thống! Vui lòng quay lại sao");
+                    });
+
+            }else{
+                Notiflix.Notify.failure(
+                    data["message"]
+                );
+            }
+        });
+    });
+
     $(".btn-add-project").click(function () {
         var name = $("#name-project").val();
         var desc = $("#desc-project").val();
